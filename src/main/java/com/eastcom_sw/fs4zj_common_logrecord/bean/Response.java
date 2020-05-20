@@ -15,6 +15,11 @@ public class Response {
     private String msg;
     private List<Map<String,Object>> datas;
 
+    public Response(boolean code,String msg){
+        this.code = code;
+        this.msg = msg;
+    }
+
     public boolean isCode() {
         return code;
     }

@@ -60,7 +60,6 @@ public class SystemLogAspect {
         //获取request对象
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
             .getRequestAttributes()).getRequest();
-
         // 请求的IP
         String userName = request.getParameter("UserName");
         microserviceLog = getControllerMethodDescription(joinPoint);
@@ -92,11 +91,11 @@ public class SystemLogAspect {
         applicationContext.publishEvent(new SystemLogEvent(microserviceLog));
     }
 
-    @Around("controllerAspect()")
-    public void around(){
-
-        return;
-    }
+//    @Around("controllerAspect()")
+//    public void around(){
+//
+//        System.out.println("around---------------------");
+//    }
 
     /**
      * 异常通知
@@ -105,9 +104,13 @@ public class SystemLogAspect {
      */
     @AfterThrowing(pointcut = "controllerAspect()", throwing = "e")
     public void doAfterThrowable(Throwable e) {
+
+        microserviceLog.setResponse_host_ip(OwnUtil.getSerIp());
+        microserviceLog.setId(OwnUtil.getUUID());
         //异常
         microserviceLog.setResponse_status("失败");
-        microserviceLog.setRemark(e.getMessage());
+        microserviceLog.setRemark(e.getMessage()+":"+e.toString());
+        microserviceLog.setRequest_date(new Date());
         //发布事件
         applicationContext.publishEvent(new SystemLogEvent(microserviceLog));
     }

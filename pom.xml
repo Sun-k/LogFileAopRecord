@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.eastcom_sw</groupId>
-	<artifactId>LogFileAopRecord</artifactId>
+	<artifactId>fs4zj_common_logrecord</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>LogFileAopRecord</name>
+	<name>fs4zj_common_logrecord</name>
 	<description>log record  for Spring Boot</description>
 
 	<properties>
@@ -47,6 +47,14 @@
             <version>5.5.0</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/cn.easyproject/orai18n -->
+        <dependency>
+            <groupId>cn.easyproject</groupId>
+            <artifactId>orai18n</artifactId>
+            <version>12.1.0.2.0</version>
+        </dependency>
+
 
 
         <dependency>
@@ -98,9 +106,15 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.7</version>
         </dependency>
-
-
     </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>artifactory224</id>
+            <name>inas release</name>
+            <url>http://10.8.132.224:8081/artifactory/libs-common</url>
+        </repository>
+    </distributionManagement>
 
 	<build>
 		<plugins>

@@ -1,5 +1,6 @@
 package com.eastcom_sw.fs4zj_common_logrecord.log;
 
+import com.eastcom_sw.firebrand.common.utils.OwnUtil;
 import com.eastcom_sw.fs4zj_common_logrecord.bean.MicroserviceLog;
 import com.eastcom_sw.fs4zj_common_logrecord.dao.MicroserviceJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class SystemLogListener {
     @EventListener(SystemLogEvent.class)
     public void saveOperateRecord(SystemLogEvent event) {
         MicroserviceLog microserviceLog = (MicroserviceLog) event.getSource();
+        if(null == microserviceLog.getId()){
+            microserviceLog.setId(OwnUtil.getUUID());
+        }
         //保存日志
         microserviceJpaRepository.save(microserviceLog);
     }
